@@ -1,0 +1,48 @@
+:root {
+    --outline-color: lightgray;
+    --outline-text-color: black;
+    --outline-style: solid;
+}
+.block-editor-block-list__layout .wp-block {
+    outline: 1px var(--outline-style) transparent;
+    padding: 0.5rem;
+    transition: all 0.2s;
+}
+.block-editor-block-list__layout .wp-block:hover {
+    outline-color: var(--outline-color);
+}
+.block-editor-block-list__layout .wp-block:hover::before {
+    opacity: 1;
+}
+.block-editor-block-list__layout .wp-block::before {
+    content: attr(data-type);
+    padding: 0.3em 0.6em;
+    font-size: 0.8rem;
+    position: absolute;
+    color: var(--outline-text-color);
+    font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;
+    top: 0;
+    right: 0;
+    left: initial !important;
+    background-color: var(--outline-color);
+    transition: all 0.2s;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+    font-weight: 400;
+}
+body[show-block-name='false'] .block-editor-block-list__layout .wp-block::before {
+    opacity: 0 !important;
+}
+body[show-outline='always'] .block-editor-block-list__layout .wp-block {
+    outline-color: var(--outline-color);
+}
+body[show-outline='always'] .block-editor-block-list__layout .wp-block::before {
+    opacity: 1;
+}
+body[show-outline='never'] .block-editor-block-list__layout .wp-block {
+    outline-color: transparent !important;
+}
+body[show-outline='never'] .block-editor-block-list__layout .wp-block::before {
+    opacity: 0 !important;
+}
