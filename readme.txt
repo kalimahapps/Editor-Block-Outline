@@ -12,7 +12,7 @@ Add outline around Gutenberg blocks while editing
 
 == Description ==
 
-This is a simple Gutenberg plugin that adds an outline around each block. Outline settings are based on user meta. Each use can
+This is a simple Gutenberg plugin that adds an outline around each block. Outline settings are based on user meta. Each user can
 change the settings according to their needs.
 
 Users can change:
