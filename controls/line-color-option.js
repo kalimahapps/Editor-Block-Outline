@@ -22,14 +22,21 @@ function outlineColorOption(element, components, data, compose) {
                 });
 
                 completeDispatch.then(() => {
+                    const c = jQuery.Color(metaValue);
+                    c.toHslaString();
+
+                    // Form HSLA color
+                    const saturation = Math.round(c._hsla[1] * 100);
+                    const lightness = Math.round(c._hsla[2] * 100);
+
+                    const hsla = `hsla(${c._hsla[0]}deg, ${saturation}%, ${lightness}%, var(--outline-opacity))`;
                     let root = document.documentElement;
-                    root.style.setProperty('--outline-color', metaValue);
+                    root.style.setProperty('--outline-color', hsla);
 
                     // update text color
-                    const c = jQuery.Color(metaValue);
-                    const lightness = c.lightness();
+                    const colorLightness = c.lightness();
                     let color = '#000000';
-                    if (lightness < 0.5) color = '#ffffff';
+                    if (colorLightness < 0.5) color = '#ffffff';
                     document.documentElement.style.setProperty('--outline-text-color', color);
                 });
             },

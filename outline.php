@@ -2,15 +2,11 @@
 /*
 Plugin Name: Editor Block Outline
 Description: Add outline around Gutenberg blocks while editing
-Version: 1.0.0
+Version: 1.0.1
 Author: Kalimah Apps
 Author URI: https://github.com/kalimah-apps
 License: GPLv2 or later
 Text Domain: guten-outline
- */
-
-/* Credit
-Icon: https://thenounproject.com/andrejs/
  */
 
 if (!defined('ABSPATH')) {
@@ -58,6 +54,16 @@ add_action('init', function () {
             return current_user_can('edit_posts');
         },
     ));
+
+    register_meta('user', '_block_outline_opacity', array(
+        'type'          => 'number',
+        'single'        => true,
+        'default'       => 1,
+        'show_in_rest'  => true,
+        'auth_callback' => function () {
+            return current_user_can('edit_posts');
+        },
+    ));
 });
 
 add_action('enqueue_block_editor_assets', function () {
@@ -90,9 +96,16 @@ add_action('enqueue_block_editor_assets', function () {
     );
 
     wp_enqueue_script(
+        'outline-line-opacity-option',
+        plugins_url('controls/line-opacity-option.js', __FILE__),
+        array('wp-data'),
+        filemtime(dirname(__FILE__) . '/controls/line-opacity-option.js')
+    );
+
+    wp_enqueue_script(
         'outline-sidebar',
         plugins_url('sidebar.js', __FILE__),
-        array('outline-lines-option', 'outline-blockname-option', 'outline-line-color-option', 'wp-i18n', 'wp-blocks', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-data', 'wp-plugins'),
+        array('outline-lines-option', 'outline-blockname-option', 'outline-line-color-option', 'outline-line-opacity-option', 'wp-i18n', 'wp-blocks', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-data', 'wp-plugins'),
         filemtime(dirname(__FILE__) . '/sidebar.js')
     );
 
@@ -123,6 +136,7 @@ add_action('admin_enqueue_scripts', function () {
         'show_block_name' => ($show_block_name) ? 'true' : 'false',
         'outline_color'   => get_user_meta($curent_user, '_block_outline_color', true),
         'outline_style'   => get_user_meta($curent_user, '_block_outline_style', true),
+        'outline_opacity' => get_user_meta($curent_user, '_block_outline_opacity', true),
     );
     wp_localize_script('outlines-init', 'outlineUserOptions', $outlineOptions);
 });

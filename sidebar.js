@@ -9,6 +9,7 @@
     const outlineBlockNameShow = outlineBlockNameOption(element, components, data, compose);
     const outlineStyle = outlineStyleOption(element, components, data, compose);
     const linesColorOption = outlineColorOption(element, components, data, compose);
+    const linesOpacityOption = outlineOpacityOption(element, components, data, compose);
     registerPlugin('gutenberg-outline', {
         render: function () {
             return el(
@@ -45,9 +46,13 @@
                         el(linesColorOption, {
                             metaKey: '_block_outline_color',
                         }),
-                        el('h2', {}, 'Line style'),
+                        el('h2', {}, 'Outline style'),
                         el(outlineStyle, {
                             metaKey: '_block_outline_style',
+                        }),
+                        el('h2', {}, 'Outline opacity'),
+                        el(linesOpacityOption, {
+                            metaKey: '_block_outline_opacity',
                         })
                     )
                 )
