@@ -13,85 +13,105 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-add_action(
-	'init',
-	function () {
-		wp_enqueue_script( 'jquery-color' );
-		register_meta(
-			'user',
-			'_enable_block_outline',
-			array(
-				'type'          => 'string',
-				'single'        => true,
-				'default'       => 'hover',
-				'show_in_rest'  => true,
-				'auth_callback' => function () {
-					return current_user_can( 'edit_posts' );
-				},
-			)
-		);
-
-		register_meta(
-			'user',
-			'_show_block_name',
-			array(
-				'type'          => 'boolean',
-				'single'        => true,
-				'default'       => true,
-				'show_in_rest'  => true,
-				'auth_callback' => function () {
-					return current_user_can( 'edit_posts' );
-				},
-			)
-		);
-
-		register_meta(
-			'user',
-			'_block_outline_color',
-			array(
-				'type'          => 'string',
-				'single'        => true,
-				'default'       => '#bdc3c7',
-				'show_in_rest'  => true,
-				'auth_callback' => function () {
-					return current_user_can( 'edit_posts' );
-				},
-			)
-		);
-
-		register_meta(
-			'user',
-			'_block_outline_style',
-			array(
-				'type'          => 'string',
-				'single'        => true,
-				'default'       => 'solid',
-				'show_in_rest'  => true,
-				'auth_callback' => function () {
-					return current_user_can( 'edit_posts' );
-				},
-			)
-		);
-
-		register_meta(
-			'user',
-			'_block_outline_opacity',
-			array(
-				'type'          => 'number',
-				'single'        => true,
-				'default'       => 1,
-				'show_in_rest'  => true,
-				'auth_callback' => function () {
-					return current_user_can( 'edit_posts' );
-				},
-			)
-		);
+/**
+ * Editor outline class to wrap plugin functions and actions
+ */
+class EditorOutline {
+	/**
+	 * Constructor function.
+	 */
+	public function __construct() {
+		add_action( 'init', array( $this, 'register_user_meta' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'add_editor_assets' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'add_admin_scripts' ) );
 	}
-);
 
-add_action(
-	'enqueue_block_editor_assets',
-	function () {
+
+	/**
+	 * Register user meta to save settings for each user separately
+	 *
+	 * @return void
+	 */
+	public function register_user_meta() {
+			wp_enqueue_script( 'jquery-color' );
+			register_meta(
+				'user',
+				'_enable_block_outline',
+				array(
+					'type'          => 'string',
+					'single'        => true,
+					'default'       => 'hover',
+					'show_in_rest'  => true,
+					'auth_callback' => function () {
+						return current_user_can( 'edit_posts' );
+					},
+				)
+			);
+
+			register_meta(
+				'user',
+				'_show_block_name',
+				array(
+					'type'          => 'boolean',
+					'single'        => true,
+					'default'       => true,
+					'show_in_rest'  => true,
+					'auth_callback' => function () {
+						return current_user_can( 'edit_posts' );
+					},
+				)
+			);
+
+			register_meta(
+				'user',
+				'_block_outline_color',
+				array(
+					'type'          => 'string',
+					'single'        => true,
+					'default'       => '#bdc3c7',
+					'show_in_rest'  => true,
+					'auth_callback' => function () {
+						return current_user_can( 'edit_posts' );
+					},
+				)
+			);
+
+			register_meta(
+				'user',
+				'_block_outline_style',
+				array(
+					'type'          => 'string',
+					'single'        => true,
+					'default'       => 'solid',
+					'show_in_rest'  => true,
+					'auth_callback' => function () {
+						return current_user_can( 'edit_posts' );
+					},
+				)
+			);
+
+			register_meta(
+				'user',
+				'_block_outline_opacity',
+				array(
+					'type'          => 'number',
+					'single'        => true,
+					'default'       => 50,
+					'show_in_rest'  => true,
+					'auth_callback' => function () {
+						return current_user_can( 'edit_posts' );
+					},
+				)
+			);
+	}
+
+
+	/**
+	 * Add js/css file to Gutenberg editor
+	 *
+	 * @return void
+	 */
+	public function add_editor_assets() {
 		wp_enqueue_script(
 			'outline-lines-option',
 			plugins_url( 'controls/lines-option.js', __FILE__ ),
@@ -130,7 +150,20 @@ add_action(
 		wp_enqueue_script(
 			'outline-sidebar',
 			plugins_url( 'sidebar.js', __FILE__ ),
-			array( 'outline-lines-option', 'outline-blockname-option', 'outline-line-color-option', 'outline-line-opacity-option', 'wp-i18n', 'wp-blocks', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-data', 'wp-plugins' ),
+			array(
+				'outline-lines-option',
+				'outline-blockname-option',
+				'outline-line-color-option',
+				'outline-line-opacity-option',
+				'wp-i18n',
+				'wp-blocks',
+				'wp-edit-post',
+				'wp-element',
+				'wp-editor',
+				'wp-components',
+				'wp-data',
+				'wp-plugins'
+			),
 			filemtime( dirname( __FILE__ ) . '/sidebar.js' )
 		);
 
@@ -140,19 +173,15 @@ add_action(
 			array( 'wp-element' ),
 			filemtime( dirname( __FILE__ ) . '/icon.js' )
 		);
-	}
-);
-
-add_action(
-	'enqueue_block_editor_assets',
-	function () {
 		wp_enqueue_style( 'gird-style', plugin_dir_url( __FILE__ ) . '/block-editor.css', false, '1.0', 'all' );
 	}
-);
 
-add_action(
-	'admin_enqueue_scripts',
-	function () {
+	/**
+	 * Add js/css to backend
+	 *
+	 * @return void
+	 */
+	public function add_admin_scripts() {
 		wp_enqueue_script(
 			'outlines-init',
 			plugins_url( 'init.js', __FILE__ ),
@@ -171,4 +200,6 @@ add_action(
 		);
 		wp_localize_script( 'outlines-init', 'outlineUserOptions', $outline_options );
 	}
-);
+}
+
+new EditorOutline();
