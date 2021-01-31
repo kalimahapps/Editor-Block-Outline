@@ -2,7 +2,7 @@
 /*
 Plugin Name: Editor Block Outline
 Description: Add outline around Gutenberg blocks while editing
-Version: 1.0.1
+Version: 1.0.2
 Author: Kalimah Apps
 Author URI: https://github.com/kalimah-apps
 License: GPLv2 or later
@@ -17,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Editor outline class to wrap plugin functions and actions
  */
 class EditorOutline {
+	private $user_meta = array();
+
 	/**
 	 * Constructor function.
 	 */
@@ -33,76 +35,50 @@ class EditorOutline {
 	 * @return void
 	 */
 	public function register_user_meta() {
-			wp_enqueue_script( 'jquery-color' );
-			register_meta(
-				'user',
-				'_enable_block_outline',
-				array(
-					'type'          => 'string',
-					'single'        => true,
-					'default'       => 'hover',
-					'show_in_rest'  => true,
-					'auth_callback' => function () {
-						return current_user_can( 'edit_posts' );
-					},
-				)
-			);
+		/*
+		Create array of user meta.
+		This array will also be used when plugin is deleted to
+		remove all meta
+		*/
+		$this->user_meta = array(
+			'_enable_block_outline' => array(
+				'type'          => 'string',
+				'default'       => 'hover'
+			),
+			'_show_block_name' => array(
+				'type'          => 'boolean',
+				'default'       => true,
+			),
+			'_block_outline_color' => array(
+				'type'          => 'string',
+				'default'       => '#bdc3c7',
+			),
+			'_block_outline_style' => array(
+				'type'          => 'string',
+				'default'       => 'solid',
+			),
+			'_block_outline_opacity' => array(
+				'type'          => 'number',
+				'default'       => 50,
+			),
+		);
 
-			register_meta(
-				'user',
-				'_show_block_name',
-				array(
-					'type'          => 'boolean',
-					'single'        => true,
-					'default'       => true,
-					'show_in_rest'  => true,
-					'auth_callback' => function () {
-						return current_user_can( 'edit_posts' );
-					},
-				)
-			);
+		$default_options = array(
+			'single'        => true,
+			'show_in_rest'  => true,
+			'auth_callback' => function () {
+				return current_user_can( 'edit_posts' );
+			},
+		);
 
+		// Merge default meta options and register meta
+		foreach ( $this->user_meta as $meta_key => $meta_value ) {
 			register_meta(
 				'user',
-				'_block_outline_color',
-				array(
-					'type'          => 'string',
-					'single'        => true,
-					'default'       => '#bdc3c7',
-					'show_in_rest'  => true,
-					'auth_callback' => function () {
-						return current_user_can( 'edit_posts' );
-					},
-				)
+				$meta_key,
+				array_merge( $meta_value, $default_options )
 			);
-
-			register_meta(
-				'user',
-				'_block_outline_style',
-				array(
-					'type'          => 'string',
-					'single'        => true,
-					'default'       => 'solid',
-					'show_in_rest'  => true,
-					'auth_callback' => function () {
-						return current_user_can( 'edit_posts' );
-					},
-				)
-			);
-
-			register_meta(
-				'user',
-				'_block_outline_opacity',
-				array(
-					'type'          => 'number',
-					'single'        => true,
-					'default'       => 50,
-					'show_in_rest'  => true,
-					'auth_callback' => function () {
-						return current_user_can( 'edit_posts' );
-					},
-				)
-			);
+		}
 	}
 
 
@@ -112,68 +88,75 @@ class EditorOutline {
 	 * @return void
 	 */
 	public function add_editor_assets() {
-		wp_enqueue_script(
-			'outline-lines-option',
-			plugins_url( 'controls/lines-option.js', __FILE__ ),
-			array( 'wp-data' ),
-			filemtime( dirname( __FILE__ ) . '/controls/lines-option.js' )
-		);
+		wp_enqueue_script( 'jquery-color' );
 
-		wp_enqueue_script(
-			'outline-blockname-option',
-			plugins_url( 'controls/block-name-option.js', __FILE__ ),
-			array( 'wp-data' ),
-			filemtime( dirname( __FILE__ ) . '/controls/block-name-option.js' )
-		);
-
-		wp_enqueue_script(
-			'outline-line-color-option',
-			plugins_url( 'controls/line-color-option.js', __FILE__ ),
-			array( 'wp-data' ),
-			filemtime( dirname( __FILE__ ) . '/controls/line-color-option.js' )
-		);
-
-		wp_enqueue_script(
-			'outline-line-style-option',
-			plugins_url( 'controls/line-style-option.js', __FILE__ ),
-			array( 'wp-data' ),
-			filemtime( dirname( __FILE__ ) . '/controls/line-style-option.js' )
-		);
-
-		wp_enqueue_script(
-			'outline-line-opacity-option',
-			plugins_url( 'controls/line-opacity-option.js', __FILE__ ),
-			array( 'wp-data' ),
-			filemtime( dirname( __FILE__ ) . '/controls/line-opacity-option.js' )
-		);
-
-		wp_enqueue_script(
-			'outline-sidebar',
-			plugins_url( 'sidebar.js', __FILE__ ),
+		// Enqueue scripts
+		$scripts = array(
 			array(
-				'outline-lines-option',
-				'outline-blockname-option',
-				'outline-line-color-option',
-				'outline-line-opacity-option',
-				'wp-i18n',
-				'wp-blocks',
-				'wp-edit-post',
-				'wp-element',
-				'wp-editor',
-				'wp-components',
-				'wp-data',
-				'wp-plugins'
+				'file_path' => 'controls.js',
+				'deps' => array(
+					'wp-element',
+					'wp-components',
+					'wp-data'
+				),
 			),
-			filemtime( dirname( __FILE__ ) . '/sidebar.js' )
+			array(
+				'file_path' => 'controls/lines-option.js',
+				'deps' => array( 'wp-data' ),
+			),
+			array(
+				'file_path' => 'controls/block-name-option.js',
+				'deps' => array( 'wp-data' ),
+			),
+			array(
+				'file_path' => 'controls/line-color-option.js',
+				'deps' => array( 'wp-data' ),
+			),
+			array(
+				'file_path' => 'controls/line-style-option.js',
+				'deps' => array( 'wp-data' ),
+			),
+			array(
+				'file_path' => 'controls/line-opacity-option.js',
+				'deps' => array( 'wp-data' ),
+			),
+			array(
+				'file_path' => 'sidebar.js',
+				'deps' => array(
+					'wp-i18n',
+					'wp-blocks',
+					'wp-edit-post',
+					'wp-element',
+					'wp-editor',
+					'wp-plugins'
+				),
+			),
+			array(
+				'file_path' => 'icon.js',
+				'deps' => array( 'wp-element' ),
+			)
 		);
 
-		wp_enqueue_script(
-			'outline-lines-icon',
-			plugins_url( 'icon.js', __FILE__ ),
-			array( 'wp-element' ),
-			filemtime( dirname( __FILE__ ) . '/icon.js' )
+		// Loop through scripts, prepeare enqueue argeumtns and add
+		foreach ( $scripts as $script_details ) {
+			$find = array( '.js', '/' );
+			$replace = array( '', '-' );
+			$handle = str_replace( $find, $replace, $script_details['file_path'] );
+
+			$src = plugins_url( $script_details['file_path'], __FILE__ );
+			$deps = $script_details['deps'];
+			$version = filemtime( dirname( __FILE__ ) . '/' . $script_details['file_path'] );
+
+			wp_enqueue_script( $handle, $src, $deps, $version );
+		}
+
+		wp_enqueue_style(
+			'gird-style',
+			plugin_dir_url( __FILE__ ) . '/block-editor.css',
+			false,
+			filemtime( dirname( __FILE__ ) . '/block-editor.css' ),
+			'all'
 		);
-		wp_enqueue_style( 'gird-style', plugin_dir_url( __FILE__ ) . '/block-editor.css', false, '1.0', 'all' );
 	}
 
 	/**

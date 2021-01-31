@@ -1,0 +1,10 @@
+{
+	"name": "editor-block-outline",
+	"author": "",
+	"homepage": "https://github.com/kalimah-apps/Editor-Block-Outline#readme",
+	"devDependencies": {
+		"eslint": "^7.18.0",
+		"eslint-config-airbnb-base": "^14.2.1",
+		"eslint-plugin-import": "^2.22.1"
+	}
+}
