@@ -29,6 +29,10 @@ Users can change:
 2. User options
 
 == Changelog ==
+= 1.0.2 =
+
+-   Code formatting and optimization
+
 = 1.0.1 =
 
 -   Added opacity option
