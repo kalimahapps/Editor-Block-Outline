@@ -3,6 +3,7 @@
 		const body = $('body');
 		body.attr('show-outline', outlineUserOptions.show_outline);
 		body.attr('show-block-name', outlineUserOptions.show_block_name);
+		body.attr('lock-block-outline', outlineUserOptions.lock_block_outline);
 
 		// update outline color
 		const c = jQuery.Color(outlineUserOptions.outline_color);
@@ -29,5 +30,9 @@
 		// Set outline opacity
 		const opacity = outlineUserOptions.outline_opacity / 100;
 		document.documentElement.style.setProperty('--outline-opacity', opacity);
+
+		// Set outline padding
+		const padding = outlineUserOptions.outline_padding;
+		document.documentElement.style.setProperty('--outline-padding', `${padding}px`);
 	});
 })(jQuery);

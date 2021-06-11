@@ -8,11 +8,13 @@
 
 	const outlineShow = new Controls(outlineShowOptions, { outlineShowState: '' });
 	const outlineBlockNameShow = new Controls(outlineBlockNameOption, { outlineNameState: '' });
+	const lockBlockOutline = new Controls(lockBlockOutlineOption, { outlineLockState: '' });
 	const outlineStyle = new Controls(outlineStyleOption, { outlineStyleState: '' });
 	const linesColorOption = new Controls(outlineColorOption, { outlineColorState: '' });
 	const linesOpacityOption = new Controls(outlineOpacityOption, { outlineOpcityState: '' });
+	const linesPaddingOption = new Controls(outlinePaddingOption, { outlineOpcityState: '' });
 
-	registerPlugin('gutenberg-outline', {
+	registerPlugin('editor-block-outline', {
 		render() {
 			return el(
 				Fragment,
@@ -20,41 +22,54 @@
 				el(
 					PluginSidebarMoreMenuItem,
 					{
-						target: 'gutenberg-outline',
-						icon: smileIcon,
+						target: 'editor-outline',
+						icon: sidebarIcon,
 					},
-					'Gutenberg Lines'
+					'Editor Block Outline'
 				),
 
 				el(
 					PluginSidebar,
 					{
-						name: 'gutenberg-outline',
-						icon: smileIcon,
-						title: 'Gutenberg block outline',
+						name: 'editor-outline',
+						icon: sidebarIcon,
+						title: 'Editor block outline',
 					},
 					el(
 						PanelBody,
-						{},
+						{
+							className: 'editor-block-outline-sidebar',
+						},
 						el('h2', {}, 'When to show block outline?'),
 						el(outlineShow, {
 							metaKey: '_enable_block_outline',
 						}),
-						el('h2', {}, ''),
+						el('h4', {}, ''),
 						el(outlineBlockNameShow, {
 							metaKey: '_show_block_name',
 						}),
+						el(lockBlockOutline, {
+							metaKey: '_lock_block_outline',
+						}),
+						el('hr', {}),
 						el('h2', {}, 'Outline color'),
 						el(linesColorOption, {
 							metaKey: '_block_outline_color',
 						}),
+						el('hr', {}),
 						el('h2', {}, 'Outline style'),
 						el(outlineStyle, {
 							metaKey: '_block_outline_style',
 						}),
+						el('hr', {}),
 						el('h2', {}, 'Outline opacity'),
 						el(linesOpacityOption, {
 							metaKey: '_block_outline_opacity',
+						}),
+						el('hr', {}),
+						el('h2', {}, 'Outline padding'),
+						el(linesPaddingOption, {
+							metaKey: '_block_outline_padding',
 						})
 					)
 				)

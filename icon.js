@@ -1,17 +1,24 @@
-const smileIcon = wp.element.createElement(
-	'svg',
-	{
-		width: 30,
-		height: 30,
-		viewBox: '0 0 280 280',
-		x: '0px',
-		y: '0px',
-	},
-
-	wp.element.createElement('path', {
-		style: { fill: 'none', stroke: 'currentColor', strokeWidth: '10' },
-		transform: 'rotate(-90 15.828831672668459,241.01043701171875)',
-		d:
-			'M 15.82883,254.51968 V 227.50117 M 219.7193,254.5197 v -27.01852 m 8.37946,239.73374 h 27.01852 M 228.09876,262.84204 h 27.01852 M 15.082552,503.15623 V 476.13772 M 220.46557,503.15626 V 476.13774 M -19.906121,467.23492 H 7.1123987 M -19.906121,262.84204 H 7.1123987 M 192.84048,289.29857 V 438.29858 H 43.840479 V 289.29857 Z m 28,-26.99999 v 206 H 14.840479 v -206 z',
-	})
-);
+const sidebarIcon = wp.element.RawHTML({
+	children: `<svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 205.54 205.54">
+  <defs>
+    <style>
+      .border {
+        fill: none;
+      }
+      .border,
+      .box {
+        stroke: currentColor;
+        stroke-miterlimit: 10;
+        stroke-width: 10px;
+      }
+      .box {
+        fill: currentColor;
+      }
+    </style>
+  </defs>
+    <rect class="border" x="1" y="1" width="203.54" height="203.54"></rect>
+    <rect class="border" x="39.05" y="39.05" width="127.43" height="127.43"></rect>
+    <rect class="box" x="75.34" y="75.34" width="54.87" height="54.87"></rect>
+</svg>
+`,
+});

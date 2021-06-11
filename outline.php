@@ -2,17 +2,18 @@
 /*
 Plugin Name: Editor Block Outline
 Description: Add outline around Gutenberg blocks while editing
-Version: 1.0.2
+Version: 1.0.3
 Author: Kalimah Apps
 Author URI: https://github.com/kalimah-apps
 License: GPLv2 or later
-Text Domain: guten-outline
+Text Domain: editor-outline
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once( 'promotions.php' );
 /**
  * Editor outline class to wrap plugin functions and actions
  */
@@ -45,6 +46,10 @@ class EditorOutline {
 				'type'          => 'string',
 				'default'       => 'hover'
 			),
+			'_lock_block_outline' => array(
+				'type'          => 'boolean',
+				'default'       => true
+			),
 			'_show_block_name' => array(
 				'type'          => 'boolean',
 				'default'       => true,
@@ -60,6 +65,10 @@ class EditorOutline {
 			'_block_outline_opacity' => array(
 				'type'          => 'number',
 				'default'       => 50,
+			),
+			'_block_outline_padding' => array(
+				'type'          => 'number',
+				'default'       => 3,
 			),
 		);
 
@@ -109,6 +118,10 @@ class EditorOutline {
 				'deps' => array( 'wp-data' ),
 			),
 			array(
+				'file_path' => 'controls/lock-block-outline.js',
+				'deps' => array( 'wp-data' ),
+			),
+			array(
 				'file_path' => 'controls/line-color-option.js',
 				'deps' => array( 'wp-data' ),
 			),
@@ -118,6 +131,10 @@ class EditorOutline {
 			),
 			array(
 				'file_path' => 'controls/line-opacity-option.js',
+				'deps' => array( 'wp-data' ),
+			),
+			array(
+				'file_path' => 'controls/line-padding-option.js',
 				'deps' => array( 'wp-data' ),
 			),
 			array(
@@ -174,12 +191,15 @@ class EditorOutline {
 
 		$curent_user     = get_current_user_id();
 		$show_block_name = get_user_meta( $curent_user, '_show_block_name', true );
+		$lock_outline = get_user_meta( $curent_user, '_lock_block_outline', true );
 		$outline_options  = array(
 			'show_outline'    => get_user_meta( $curent_user, '_enable_block_outline', true ),
 			'show_block_name' => ( $show_block_name ) ? 'true' : 'false',
+			'lock_block_outline' => ( $lock_outline ) ? 'true' : 'false',
 			'outline_color'   => get_user_meta( $curent_user, '_block_outline_color', true ),
 			'outline_style'   => get_user_meta( $curent_user, '_block_outline_style', true ),
 			'outline_opacity' => get_user_meta( $curent_user, '_block_outline_opacity', true ),
+			'outline_padding' => get_user_meta( $curent_user, '_block_outline_padding', true ),
 		);
 		wp_localize_script( 'outlines-init', 'outlineUserOptions', $outline_options );
 	}
