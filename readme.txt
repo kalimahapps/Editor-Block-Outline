@@ -20,6 +20,7 @@ Users can change:
 - When to show outline. On hover or always displayed.
 - Lock outline for a single block.
 - Disable outline completely.
+- Show data (name and class) outside block, inside or floating when hovering over block
 - Change outline color.
 - Change outline style to solid, dashed or dotted line
 - Change padding size
@@ -31,6 +32,13 @@ Users can change:
 2. Editor outline settings
 
 == Changelog ==
+= 1.1 =
+- Added data position setting (outside, inside or floating)
+- Added show class name option
+- Fixed hover setting for nested blocks
+- Removed twitter admin notice
+- Code formatting and optimization
+
 = 1.0.4 =
 - Fixed bugs
 
