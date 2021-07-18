@@ -10,6 +10,10 @@ body.is-dragging-components-draggable {
 		outline: 1px var(--outline-style) transparent;
 		padding: var(--outline-padding);
 	}
+
+	.outline-floating-block-data {
+		display: none;
+	}
 }
 body:not(.is-dragging-components-draggable) {
 	.block-editor-block-list__layout .wp-block:not(.block-list-appender):not(.block-editor-default-block-appender) {
@@ -41,10 +45,9 @@ body:not(.is-dragging-components-draggable) {
 			pointer-events: none;
 			z-index: 5;
 			font-weight: normal;
-
+			transform: translateY(-100%);
 			// Sapcer block
 			width: auto;
-			transform: initial;
 			height: auto;
 		}
 
@@ -66,14 +69,66 @@ body:not(.is-dragging-components-draggable) {
 			z-index: 5;
 			font-weight: normal;
 			line-height: 1em;
+			transform: translateY(100%);
 			// Sapcer block
 			width: auto;
-			transform: initial;
 			height: auto;
+		}
+	}
+
+	&[block-data-position='floating'] {
+		.outline-floating-block-data {
+			background-color: var(--outline-color);
+			padding: 1em;
+			position: fixed;
+			pointer-events: none;
+			color: var(--outline-text-color);
+			transform: translate(15px, -10px);
+			box-shadow: 0 0 0.8em 5px rgba(0, 0, 0, 0.1);
+			border: 1px solid var(--outline-text-color);
+			font-size: 12px;
+			border-radius: 5px;
+			> div {
+				margin-bottom: 5px;
+			}
+			.floating-row-title {
+				font-size: 15px;
+				font-weight: bold;
+				text-align: center;
+			}
+			ul {
+				padding: 0;
+				margin: 0;
+				margin-left: 20px;
+				list-style: circle;
+				li {
+					margin: 0;
+				}
+			}
 		}
 	}
 }
 
+// Block data (name and class) position
+body {
+	&[block-data-position='inside'] {
+		.block-editor-block-list__layout .wp-block {
+			&::before,
+			&::after {
+				transform: translateY(0) !important;
+			}
+		}
+	}
+
+	&[block-data-position='floating'] {
+		.block-editor-block-list__layout .wp-block {
+			&::before,
+			&::after {
+				opacity: 0 !important;
+			}
+		}
+	}
+}
 // Hide block names if not set
 body[show-block-name='false'] {
 	.block-editor-block-list__layout .wp-block::before {
@@ -101,6 +156,9 @@ body[show-outline='always'] {
 
 // disable outline
 body[show-outline='never'] {
+	.outline-floating-block-data {
+		display: none;
+	}
 	.block-editor-block-list__layout .wp-block {
 		outline-color: transparent !important;
 		&::before,

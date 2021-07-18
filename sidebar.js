@@ -10,6 +10,7 @@
 	const outlineBlockNameShow = new Controls(outlineBlockNameOption, { outlineNameState: '' });
 	const blockClassNameShow = new Controls(outlineBlockClassOption, { classNameState: '' });
 	const lockBlockOutline = new Controls(lockBlockOutlineOption, { outlineLockState: '' });
+	const dataPosition = new Controls(blockDataPositionOption, { dataPositionState: '' });
 	const outlineStyle = new Controls(outlineStyleOption, { outlineStyleState: '' });
 	const linesColorOption = new Controls(outlineColorOption, { outlineColorState: '' });
 	const linesOpacityOption = new Controls(outlineOpacityOption, { outlineOpcityState: '' });
@@ -54,6 +55,11 @@
 						}),
 						el(lockBlockOutline, {
 							metaKey: '_lock_block_outline',
+						}),
+						el('hr', {}),
+						el('h2', {}, 'Data Position'),
+						el(dataPosition, {
+							metaKey: '_block_data_position',
 						}),
 						el('hr', {}),
 						el('h2', {}, 'Outline color'),

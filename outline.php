@@ -62,6 +62,10 @@ class EditorOutline {
 				'type'          => 'string',
 				'default'       => '#bdc3c7',
 			),
+			'_block_data_position' => array(
+				'type'          => 'string',
+				'default'       => 'outside',
+			),
 			'_block_outline_style' => array(
 				'type'          => 'string',
 				'default'       => 'solid',
@@ -138,6 +142,10 @@ class EditorOutline {
 				'deps' => array( 'wp-data' ),
 			),
 			array(
+				'file_path' => 'controls/block-data-position.js',
+				'deps' => array( 'wp-data' ),
+			),
+			array(
 				'file_path' => 'controls/line-opacity-option.js',
 				'deps' => array( 'wp-data' ),
 			),
@@ -159,6 +167,10 @@ class EditorOutline {
 			array(
 				'file_path' => 'icon.js',
 				'deps' => array( 'wp-element' ),
+			),
+			array(
+				'file_path' => 'mouse-events.js',
+				'deps' => array( 'jquery' ),
 			)
 		);
 
@@ -201,11 +213,13 @@ class EditorOutline {
 		$show_block_name = get_user_meta( $curent_user, '_show_block_name', true );
 		$show_class_name = get_user_meta( $curent_user, '_show_class_name', true );
 		$lock_outline = get_user_meta( $curent_user, '_lock_block_outline', true );
+		$block_data_position = get_user_meta( $curent_user, '_block_data_position', true );
 		$outline_options  = array(
 			'show_outline'    => get_user_meta( $curent_user, '_enable_block_outline', true ),
 			'show_block_name' => ( $show_block_name ) ? 'true' : 'false',
 			'show_class_name' => ( $show_class_name ) ? 'true' : 'false',
 			'lock_block_outline' => ( $lock_outline ) ? 'true' : 'false',
+			'block_data_position' => ( $block_data_position ) ? $block_data_position : 'outside',
 			'outline_color'   => get_user_meta( $curent_user, '_block_outline_color', true ),
 			'outline_style'   => get_user_meta( $curent_user, '_block_outline_style', true ),
 			'outline_opacity' => get_user_meta( $curent_user, '_block_outline_opacity', true ),
