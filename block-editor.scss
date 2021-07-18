@@ -20,7 +20,7 @@ body:not(.is-dragging-components-draggable) {
 		outline: 1px var(--outline-style) transparent;
 		padding: var(--outline-padding);
 		transition: outline 0.2s;
-		&:hover {
+		&.outline-block-hovered {
 			outline-color: var(--outline-color);
 
 			&::before,

@@ -13,6 +13,7 @@
 					event.stopPropagation();
 
 					const el = jQuery(this);
+					el.addClass('outline-block-hovered');
 
 					// Get block data
 					const title = el.attr('data-title');
@@ -44,8 +45,11 @@
 					floatingEl.css({ opacity: 1 });
 				}
 			)
-			.on('mouseout', '.block-editor-block-list__layout .wp-block', () => {
+			.on('mouseout', '.block-editor-block-list__layout .wp-block', function (event) {
 				floatingEl.css({ opacity: 0 }).html('');
+
+				const el = jQuery(this);
+				el.removeClass('outline-block-hovered');
 			})
 			.on('mousemove', '.block-editor-block-list__layout .wp-block', (event) => {
 				floatingEl.css({
