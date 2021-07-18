@@ -70,6 +70,7 @@ body:not(.is-dragging-components-draggable) {
 			font-weight: normal;
 			line-height: 1em;
 			transform: translateY(100%);
+			min-height: auto;
 			// Sapcer block
 			width: auto;
 			height: auto;

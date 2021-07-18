@@ -14,7 +14,7 @@ function outlineStyleOption(props) {
 		currentValue = outlineStyleValue;
 	}
 
-	const editorWidthOptions = [
+	const outlineStyleTypesOptions = [
 		{ key: 'solid', name: __('Solid') },
 		{ key: 'dashed', name: __('Dashed') },
 		{ key: 'dotted', name: __('Dotted') },
@@ -23,7 +23,7 @@ function outlineStyleOption(props) {
 	return this.el(
 		ButtonGroup,
 		null,
-		editorWidthOptions.map(({ name, key }) => {
+		outlineStyleTypesOptions.map(({ name, key }) => {
 			const elProperties = {
 				key: key,
 				isDefault: true,

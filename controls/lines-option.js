@@ -14,7 +14,7 @@ function outlineShowOptions(props) {
 		currentValue = outlineShowValue;
 	}
 
-	const editorWidthOptions = [
+	const outlinShowOptionList = [
 		{ key: 'hover', name: __('Hover') },
 		{ key: 'always', name: __('Always') },
 		{ key: 'never', name: __('Disable') },
@@ -23,7 +23,7 @@ function outlineShowOptions(props) {
 	return this.el(
 		ButtonGroup,
 		null,
-		editorWidthOptions.map(({ name, key }) => {
+		outlinShowOptionList.map(({ name, key }) => {
 			const elProprites = {
 				key: key,
 				isDefault: true,
