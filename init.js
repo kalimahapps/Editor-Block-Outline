@@ -3,6 +3,7 @@
 		const body = $('body');
 		body.attr('show-outline', outlineUserOptions.show_outline);
 		body.attr('show-block-name', outlineUserOptions.show_block_name);
+		body.attr('show-class-name', outlineUserOptions.show_class_name);
 		body.attr('lock-block-outline', outlineUserOptions.lock_block_outline);
 
 		// update outline color

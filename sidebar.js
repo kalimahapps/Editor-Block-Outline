@@ -8,6 +8,7 @@
 
 	const outlineShow = new Controls(outlineShowOptions, { outlineShowState: '' });
 	const outlineBlockNameShow = new Controls(outlineBlockNameOption, { outlineNameState: '' });
+	const blockClassNameShow = new Controls(outlineBlockClassOption, { classNameState: '' });
 	const lockBlockOutline = new Controls(lockBlockOutlineOption, { outlineLockState: '' });
 	const outlineStyle = new Controls(outlineStyleOption, { outlineStyleState: '' });
 	const linesColorOption = new Controls(outlineColorOption, { outlineColorState: '' });
@@ -47,6 +48,9 @@
 						el('h4', {}, ''),
 						el(outlineBlockNameShow, {
 							metaKey: '_show_block_name',
+						}),
+						el(blockClassNameShow, {
+							metaKey: '_show_class_name',
 						}),
 						el(lockBlockOutline, {
 							metaKey: '_lock_block_outline',

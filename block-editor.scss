@@ -15,11 +15,12 @@ body:not(.is-dragging-components-draggable) {
 	.block-editor-block-list__layout .wp-block:not(.block-list-appender):not(.block-editor-default-block-appender) {
 		outline: 1px var(--outline-style) transparent;
 		padding: var(--outline-padding);
-		transition: opacity 0.2s;
+		transition: outline 0.2s;
 		&:hover {
 			outline-color: var(--outline-color);
 
-			&::before {
+			&::before,
+			&::after {
 				opacity: 1;
 			}
 		}
@@ -35,12 +36,36 @@ body:not(.is-dragging-components-draggable) {
 			right: 0;
 			left: initial !important;
 			background-color: var(--outline-color);
-			transition: all 0.2s;
+			transition: opacity 0.2s;
 			opacity: 0;
 			pointer-events: none;
 			z-index: 5;
 			font-weight: normal;
 
+			// Sapcer block
+			width: auto;
+			transform: initial;
+			height: auto;
+		}
+
+		&::after {
+			content: attr(class);
+			padding: 0.3em 0.6em;
+			font-size: 11px;
+			position: absolute;
+			color: var(--outline-text-color);
+			font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;
+			bottom: 0;
+			right: 0;
+			top: auto;
+			left: initial !important;
+			background-color: var(--outline-color);
+			transition: opacity 0.2s;
+			opacity: 0;
+			pointer-events: none;
+			z-index: 5;
+			font-weight: normal;
+			line-height: 1em;
 			// Sapcer block
 			width: auto;
 			transform: initial;
@@ -56,11 +81,19 @@ body[show-block-name='false'] {
 	}
 }
 
+// Hide class name if not enabled by user
+body[show-class-name='false'] {
+	.block-editor-block-list__layout .wp-block::after {
+		opacity: 0 !important;
+	}
+}
+
 // Always show outline
 body[show-outline='always'] {
 	.block-editor-block-list__layout .wp-block:not(.block-list-appender):not(.block-editor-default-block-appender) {
 		outline-color: var(--outline-color);
-		&::before {
+		&::before,
+		&::after {
 			opacity: 1;
 		}
 	}
@@ -70,7 +103,8 @@ body[show-outline='always'] {
 body[show-outline='never'] {
 	.block-editor-block-list__layout .wp-block {
 		outline-color: transparent !important;
-		&::before {
+		&::before,
+		&::after {
 			opacity: 0 !important;
 		}
 	}
@@ -81,7 +115,8 @@ body[lock-block-outline='true'] {
 		.wp-block.is-selected:not(.block-list-appender):not(.block-editor-default-block-appender) {
 		outline-color: var(--outline-color);
 		opacity: 1;
-		&::before {
+		&::before,
+		&::after {
 			opacity: 1;
 		}
 	}

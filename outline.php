@@ -54,6 +54,10 @@ class EditorOutline {
 				'type'          => 'boolean',
 				'default'       => true,
 			),
+			'_show_class_name' => array(
+				'type'          => 'boolean',
+				'default'       => true,
+			),
 			'_block_outline_color' => array(
 				'type'          => 'string',
 				'default'       => '#bdc3c7',
@@ -115,6 +119,10 @@ class EditorOutline {
 			),
 			array(
 				'file_path' => 'controls/block-name-option.js',
+				'deps' => array( 'wp-data' ),
+			),
+			array(
+				'file_path' => 'controls/block-class-option.js',
 				'deps' => array( 'wp-data' ),
 			),
 			array(
@@ -191,10 +199,12 @@ class EditorOutline {
 
 		$curent_user     = get_current_user_id();
 		$show_block_name = get_user_meta( $curent_user, '_show_block_name', true );
+		$show_class_name = get_user_meta( $curent_user, '_show_class_name', true );
 		$lock_outline = get_user_meta( $curent_user, '_lock_block_outline', true );
 		$outline_options  = array(
 			'show_outline'    => get_user_meta( $curent_user, '_enable_block_outline', true ),
 			'show_block_name' => ( $show_block_name ) ? 'true' : 'false',
+			'show_class_name' => ( $show_class_name ) ? 'true' : 'false',
 			'lock_block_outline' => ( $lock_outline ) ? 'true' : 'false',
 			'outline_color'   => get_user_meta( $curent_user, '_block_outline_color', true ),
 			'outline_style'   => get_user_meta( $curent_user, '_block_outline_style', true ),
