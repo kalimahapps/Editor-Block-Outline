@@ -4,6 +4,8 @@
 		const floatingEl = jQuery("<div class='outline-floating-block-data'></div>");
 		jQuery('body').append(floatingEl);
 
+		let isFloating = false;
+
 		// Handle moust events for enter, out and over for each block
 		jQuery('body')
 			.on(
@@ -26,6 +28,20 @@
 					const body = jQuery('body');
 					const showTitle = body.attr('show-block-name');
 					const showClasses = body.attr('show-class-name');
+					const dataPosition = body.attr('block-data-position');
+
+					// Don't show if position is not floating
+					if (dataPosition !== 'floating') {
+						isFloating = false;
+						return;
+					}
+
+					isFloating = true;
+
+					// Don't show the box if showtitle and showclasses are false
+					if (showTitle !== 'true' && showClasses !== 'true') {
+						return;
+					}
 
 					// Show title if user enabled it
 					if (showTitle === 'true') {
@@ -38,10 +54,6 @@
 						floatingEl.append(`<div class='floating-row'>Classes: <ul>${classesWrappers}</ul></div>`);
 					}
 
-					// Don't show the box if showtitle and showclasses are false
-					if (showTitle !== 'true' && showClasses !== 'true') {
-						return;
-					}
 					floatingEl.css({ opacity: 1 });
 				}
 			)
@@ -52,6 +64,11 @@
 				el.removeClass('outline-block-hovered');
 			})
 			.on('mousemove', '.block-editor-block-list__layout .wp-block', (event) => {
+				// Change position only for floating setting
+				if (isFloating === false) {
+					return;
+				}
+
 				floatingEl.css({
 					left: event.pageX,
 					top: event.pageY,

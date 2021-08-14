@@ -3,7 +3,7 @@ Contributors: khr2003
 Tags: gutenberg,outline,editor,blocks,layout
 Requires at least: 5.0
 Tested up to: 5.7
-Stable tag: 1.1
+Stable tag: 1.1.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -32,6 +32,10 @@ Users can change:
 2. Editor outline settings
 
 == Changelog ==
+= 1.1.1 =
+- Fixed floating box bug
+- Set initial show class name to false
+
 = 1.1 =
 - Added data position setting (outside, inside or floating)
 - Added show class name option
