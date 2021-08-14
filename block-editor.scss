@@ -41,7 +41,8 @@ body:not(.is-dragging-components-draggable) {
 			color: var(--outline-text-color);
 			font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;
 			top: 0;
-			right: 0;
+			right: -1px;
+			bottom: initial;
 			left: initial !important;
 			background-color: var(--outline-color);
 			transition: opacity 0.2s;
@@ -63,7 +64,7 @@ body:not(.is-dragging-components-draggable) {
 			color: var(--outline-text-color);
 			font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;
 			bottom: 0;
-			right: 0;
+			right: -1px;
 			top: auto;
 			left: initial !important;
 			background-color: var(--outline-color);
