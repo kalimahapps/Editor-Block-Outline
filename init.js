@@ -6,6 +6,7 @@
 		body.attr('show-class-name', outlineUserOptions.show_class_name);
 		body.attr('lock-block-outline', outlineUserOptions.lock_block_outline);
 		body.attr('block-data-position', outlineUserOptions.block_data_position);
+		body.attr('enable-outline-padding', outlineUserOptions.enable_outline_padding);
 
 		// update outline color
 		const c = jQuery.Color(outlineUserOptions.outline_color);

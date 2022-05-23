@@ -14,7 +14,8 @@
 	const outlineStyle = new Controls(outlineStyleOption, { outlineStyleState: '' });
 	const linesColorOption = new Controls(outlineColorOption, { outlineColorState: '' });
 	const linesOpacityOption = new Controls(outlineOpacityOption, { outlineOpcityState: '' });
-	const linesPaddingOption = new Controls(outlinePaddingOption, { outlineOpcityState: '' });
+	const outlinePadding = new Controls(outlinePaddingOption, { outlinePaddingState: '' });
+	const enableOutlinePadding = new Controls(enableOutlinePaddingOption, { outlinePaddingEnableState: '' });
 
 	registerPlugin('editor-block-outline', {
 		render() {
@@ -78,7 +79,10 @@
 						}),
 						el('hr', {}),
 						el('h2', {}, 'Outline padding'),
-						el(linesPaddingOption, {
+						el(enableOutlinePadding, {
+							metaKey: '_enable_block_outline_padding',
+						}),
+						el(outlinePadding, {
 							metaKey: '_block_outline_padding',
 						})
 					)

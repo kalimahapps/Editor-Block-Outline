@@ -44,11 +44,11 @@ class EditorOutline {
 		$this->user_meta = array(
 			'_enable_block_outline' => array(
 				'type'          => 'string',
-				'default'       => 'hover'
+				'default'       => 'hover',
 			),
 			'_lock_block_outline' => array(
 				'type'          => 'boolean',
-				'default'       => true
+				'default'       => true,
 			),
 			'_show_block_name' => array(
 				'type'          => 'boolean',
@@ -73,6 +73,10 @@ class EditorOutline {
 			'_block_outline_opacity' => array(
 				'type'          => 'number',
 				'default'       => 50,
+			),
+			'_enable_block_outline_padding' => array(
+				'type'          => 'boolean',
+				'default'       => false,
 			),
 			'_block_outline_padding' => array(
 				'type'          => 'number',
@@ -150,7 +154,11 @@ class EditorOutline {
 				'deps' => array( 'wp-data' ),
 			),
 			array(
-				'file_path' => 'controls/line-padding-option.js',
+				'file_path' => 'controls/enable-block-padding-option.js',
+				'deps' => array( 'wp-data' ),
+			),
+			array(
+				'file_path' => 'controls/block-padding-option.js',
 				'deps' => array( 'wp-data' ),
 			),
 			array(
@@ -223,6 +231,7 @@ class EditorOutline {
 			'outline_color'   => get_user_meta( $curent_user, '_block_outline_color', true ),
 			'outline_style'   => get_user_meta( $curent_user, '_block_outline_style', true ),
 			'outline_opacity' => get_user_meta( $curent_user, '_block_outline_opacity', true ),
+			'enable_outline_padding' => get_user_meta( $curent_user, '_enable_block_outline_padding', true ),
 			'outline_padding' => get_user_meta( $curent_user, '_block_outline_padding', true ),
 		);
 		wp_localize_script( 'outlines-init', 'outlineUserOptions', $outline_options );

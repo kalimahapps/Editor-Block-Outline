@@ -12,7 +12,6 @@
 body.is-dragging-components-draggable {
 	.block-editor-block-list__layout .wp-block:not(.block-list-appender):not(.block-editor-default-block-appender) {
 		outline: 1px var(--outline-style) transparent;
-		padding: var(--outline-padding);
 	}
 
 	.outline-floating-block-data {
@@ -22,7 +21,6 @@ body.is-dragging-components-draggable {
 body:not(.is-dragging-components-draggable) {
 	.block-editor-block-list__layout .wp-block:not(.block-list-appender):not(.block-editor-default-block-appender) {
 		outline: 1px var(--outline-style) transparent;
-		padding: var(--outline-padding);
 		transition: outline 0.2s;
 		&.outline-block-hovered {
 			outline-color: var(--outline-color);
@@ -184,6 +182,12 @@ body[lock-block-outline='true'] {
 		&::after {
 			opacity: 1;
 		}
+	}
+}
+
+body[enable-outline-padding='true'] {
+	.block-editor-block-list__layout .wp-block:not(.block-list-appender):not(.block-editor-default-block-appender) {
+		padding: var(--outline-padding);
 	}
 }
 
