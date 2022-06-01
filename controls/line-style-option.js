@@ -26,7 +26,7 @@ function outlineStyleOption(props) {
 		outlineStyleTypesOptions.map(({ name, key }) => {
 			const elProperties = {
 				key: key,
-				isDefault: true,
+				variant: 'secondary',
 				isTertiary: currentValue !== key,
 				isPrimary: currentValue === key,
 				isPressed: currentValue === key,

@@ -8,7 +8,7 @@ function outlineBlockNameOption(props) {
 		currentValue = true;
 	}
 
-	// if state value is set then use it. This will disaable UI flickering
+	// if state value is set then use it. This will disable UI flickering
 	if (outlineNameValue !== undefined && outlineNameValue !== '') {
 		currentValue = outlineNameValue;
 	}
@@ -17,7 +17,7 @@ function outlineBlockNameOption(props) {
 		label: 'Show block name',
 		checked: currentValue,
 		onChange: (value) => {
-			// upadte state to update control ui
+			// update state to update control ui
 			props.setState({
 				outlineNameState: value,
 			});

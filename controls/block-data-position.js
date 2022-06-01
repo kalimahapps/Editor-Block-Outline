@@ -26,12 +26,12 @@ function blockDataPositionOption(props) {
 		dataPositionOptions.map(({ name, key }) => {
 			const elProperties = {
 				key: key,
-				isDefault: true,
+				variant: 'secondary',
 				isTertiary: currentValue !== key,
 				isPrimary: currentValue === key,
 				isPressed: currentValue === key,
 				onClick: () => {
-					// upadte state to update control ui
+					// update state to update control ui
 					props.setState({
 						dataPositionState: key,
 					});

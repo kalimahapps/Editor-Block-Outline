@@ -6,7 +6,7 @@
 
 		let isFloating = false;
 
-		// Handle moust events for enter, out and over for each block
+		// Handle mouse events for enter, out and over for each block
 		jQuery('body')
 			.on(
 				'mouseover',
@@ -38,7 +38,7 @@
 
 					isFloating = true;
 
-					// Don't show the box if showtitle and showclasses are false
+					// Don't show the box if showTitle and showClasses are false
 					if (showTitle !== 'true' && showClasses !== 'true') {
 						return;
 					}

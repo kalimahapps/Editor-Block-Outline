@@ -9,12 +9,12 @@ function outlineShowOptions(props) {
 		currentValue = 'hover';
 	}
 
-	// if state value is set then use it. This will disaable control UI flickering
+	// if state value is set then use it. This will disable control UI flickering
 	if (outlineShowValue !== undefined && outlineShowValue !== '') {
 		currentValue = outlineShowValue;
 	}
 
-	const outlinShowOptionList = [
+	const outlineShowOptionList = [
 		{ key: 'hover', name: __('Hover') },
 		{ key: 'always', name: __('Always') },
 		{ key: 'never', name: __('Disable') },
@@ -23,10 +23,10 @@ function outlineShowOptions(props) {
 	return this.el(
 		ButtonGroup,
 		null,
-		outlinShowOptionList.map(({ name, key }) => {
-			const elProprites = {
+		outlineShowOptionList.map(({ name, key }) => {
+			const elProperties = {
 				key: key,
-				isDefault: true,
+				variant: 'secondary',
 				isTertiary: currentValue !== key,
 				isPrimary: currentValue === key,
 				isPressed: currentValue === key,
@@ -46,7 +46,7 @@ function outlineShowOptions(props) {
 				},
 			};
 
-			return this.el(Button, elProprites, name);
+			return this.el(Button, elProperties, name);
 		})
 	);
 }

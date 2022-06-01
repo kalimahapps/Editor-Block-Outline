@@ -27,7 +27,7 @@ function outlineColorOption(props) {
 		document.documentElement.style.setProperty('--outline-text-color', color);
 	}
 
-	// Get current color value and state vlue
+	// Get current color value and state value
 	let currentValue = props.metaValue;
 	const outlineColorValue = props.outlineColorState;
 
@@ -35,7 +35,7 @@ function outlineColorOption(props) {
 		currentValue = '#bdc3c7';
 	}
 
-	// if state value is set then use it. This will disaable UI flickering
+	// if state value is set then use it. This will disable UI flickering
 	if (outlineColorValue !== undefined && outlineColorValue !== '') {
 		currentValue = outlineColorValue;
 	}

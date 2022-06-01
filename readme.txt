@@ -2,7 +2,7 @@
 Contributors: khr2003,tfrommen
 Tags: gutenberg,outline,editor,blocks,layout
 Requires at least: 5.0
-Tested up to: 5.7
+Tested up to: 5.9.3
 Stable tag: 1.2
 Requires PHP: 7.0
 License: GPLv2 or later
@@ -34,6 +34,9 @@ Users can change:
 == Changelog ==
 = 1.2 =
 - Added toggle for enabling/disabling outline padding
+**Please note that this is a breaking behavioral change. Users who set
+padding previously will need to enable this option for padding to take
+effect.**
 
 = 1.1.2 =
 - Fixed block title for cover block

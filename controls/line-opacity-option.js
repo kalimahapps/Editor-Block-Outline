@@ -21,7 +21,7 @@ function outlineOpacityOption(props) {
 			const root = document.documentElement;
 			root.style.setProperty('--outline-opacity', metaValueDeci);
 
-			// upadte state to update control ui
+			// update state to update control ui
 			props.setState({
 				outlineOpcityState: value,
 			});

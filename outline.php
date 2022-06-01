@@ -182,7 +182,7 @@ class EditorOutline {
 			)
 		);
 
-		// Loop through scripts, prepeare enqueue arguments and add
+		// Loop through scripts, prepare enqueue arguments and add
 		foreach ( $scripts as $script_details ) {
 			$find = array( '.js', '/' );
 			$replace = array( '', '-' );
@@ -217,22 +217,22 @@ class EditorOutline {
 			filemtime( dirname( __FILE__ ) . '/init.js' )
 		);
 
-		$curent_user     = get_current_user_id();
-		$show_block_name = get_user_meta( $curent_user, '_show_block_name', true );
-		$show_class_name = get_user_meta( $curent_user, '_show_class_name', true );
-		$lock_outline = get_user_meta( $curent_user, '_lock_block_outline', true );
-		$block_data_position = get_user_meta( $curent_user, '_block_data_position', true );
+		$current_user     = get_current_user_id();
+		$show_block_name = get_user_meta( $current_user, '_show_block_name', true );
+		$show_class_name = get_user_meta( $current_user, '_show_class_name', true );
+		$lock_outline = get_user_meta( $current_user, '_lock_block_outline', true );
+		$block_data_position = get_user_meta( $current_user, '_block_data_position', true );
 		$outline_options  = array(
-			'show_outline'    => get_user_meta( $curent_user, '_enable_block_outline', true ),
+			'show_outline'    => get_user_meta( $current_user, '_enable_block_outline', true ),
 			'show_block_name' => ( $show_block_name ) ? 'true' : 'false',
 			'show_class_name' => ( $show_class_name ) ? 'true' : 'false',
 			'lock_block_outline' => ( $lock_outline ) ? 'true' : 'false',
 			'block_data_position' => ( $block_data_position ) ? $block_data_position : 'outside',
-			'outline_color'   => get_user_meta( $curent_user, '_block_outline_color', true ),
-			'outline_style'   => get_user_meta( $curent_user, '_block_outline_style', true ),
-			'outline_opacity' => get_user_meta( $curent_user, '_block_outline_opacity', true ),
-			'enable_outline_padding' => get_user_meta( $curent_user, '_enable_block_outline_padding', true ),
-			'outline_padding' => get_user_meta( $curent_user, '_block_outline_padding', true ),
+			'outline_color'   => get_user_meta( $current_user, '_block_outline_color', true ),
+			'outline_style'   => get_user_meta( $current_user, '_block_outline_style', true ),
+			'outline_opacity' => get_user_meta( $current_user, '_block_outline_opacity', true ),
+			'enable_outline_padding' => get_user_meta( $current_user, '_enable_block_outline_padding', true ),
+			'outline_padding' => get_user_meta( $current_user, '_block_outline_padding', true ),
 		);
 		wp_localize_script( 'outlines-init', 'outlineUserOptions', $outline_options );
 	}

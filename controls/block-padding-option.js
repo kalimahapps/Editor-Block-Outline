@@ -21,7 +21,7 @@ function outlinePaddingOption(props) {
 			const root = document.documentElement;
 			root.style.setProperty('--outline-padding', metaValueWithPx);
 
-			// upadte state to update control ui
+			// update state to update control ui
 			props.setState({
 				outlinePaddingState: value,
 			});

@@ -8,7 +8,7 @@ function outlineBlockClassOption(props) {
 		currentValue = false;
 	}
 
-	// if state value is set then use it. This will disaable UI flickering
+	// if state value is set then use it. This will disable UI flickering
 	if (classNameValue !== undefined && classNameValue !== '') {
 		currentValue = classNameValue;
 	}
@@ -17,7 +17,7 @@ function outlineBlockClassOption(props) {
 		label: 'Show class name',
 		checked: currentValue,
 		onChange: (value) => {
-			// upadte state to update control ui
+			// update state to update control ui
 			props.setState({
 				classNameState: value,
 			});

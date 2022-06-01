@@ -8,7 +8,7 @@ function lockBlockOutlineOption(props) {
 		currentValue = true;
 	}
 
-	// if state value is set then use it. This will disaable UI flickering
+	// if state value is set then use it. This will disable UI flickering
 	if (outlineLockValue !== undefined && outlineLockValue !== '') {
 		currentValue = outlineLockValue;
 	}
@@ -17,7 +17,7 @@ function lockBlockOutlineOption(props) {
 		label: 'Lock outline when hovering away',
 		checked: currentValue,
 		onChange: (value) => {
-			// upadte state to update control ui
+			// update state to update control ui
 			props.setState({
 				outlineLockState: value,
 			});
