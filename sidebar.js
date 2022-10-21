@@ -13,7 +13,7 @@
 	const dataPosition = new Controls(blockDataPositionOption, { dataPositionState: '' });
 	const outlineStyle = new Controls(outlineStyleOption, { outlineStyleState: '' });
 	const linesColorOption = new Controls(outlineColorOption, { outlineColorState: '' });
-	const linesOpacityOption = new Controls(outlineOpacityOption, { outlineOpcityState: '' });
+	const linesOpacityOption = new Controls(outlineOpacityOption, { outlineOpacityState: '' });
 	const outlinePadding = new Controls(outlinePaddingOption, { outlinePaddingState: '' });
 	const enableOutlinePadding = new Controls(enableOutlinePaddingOption, { outlinePaddingEnableState: '' });
 

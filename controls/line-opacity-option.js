@@ -2,7 +2,7 @@ function outlineOpacityOption(props) {
 	const { RangeControl } = this.components;
 
 	let currentValue = props.metaValue;
-	const opacityValue = props.outlineOpcityState;
+	const opacityValue = props.outlineOpacityState;
 
 	if (currentValue === undefined) {
 		currentValue = 1;
@@ -23,7 +23,7 @@ function outlineOpacityOption(props) {
 
 			// update state to update control ui
 			props.setState({
-				outlineOpcityState: value,
+				outlineOpacityState: value,
 			});
 
 			// Debounce so value is only updated in meta once user stops dragging

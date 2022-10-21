@@ -2,8 +2,8 @@
 Contributors: khr2003,tfrommen
 Tags: gutenberg,outline,editor,blocks,layout
 Requires at least: 5.0
-Tested up to: 5.9.3
-Stable tag: 1.2
+Tested up to: 6.0.3
+Stable tag: 1.2.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -32,6 +32,10 @@ Users can change:
 2. Editor outline settings
 
 == Changelog ==
+= 1.2.1 =
+
+- Fixed colorpalette issue with WordPress 6.0+
+
 = 1.2 =
 - Added toggle for enabling/disabling outline padding
 **Please note that this is a breaking behavioral change. Users who set

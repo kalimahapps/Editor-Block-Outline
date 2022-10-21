@@ -78,8 +78,12 @@ class Controls {
 		if (Object.keys(userData).length == 0) return {};
 
 		const user = select('core').getEntityRecord('root', 'user', userData.id);
+		if (user === undefined) {
+			return {};
+		}
+
 		return {
-			metaValue: user == undefined ? true : user.meta[props.metaKey],
+			metaValue: user.meta[props.metaKey],
 		};
 	}
 }
