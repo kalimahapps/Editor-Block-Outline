@@ -2,8 +2,8 @@
 Contributors: khr2003,tfrommen
 Tags: gutenberg,outline,editor,blocks,layout
 Requires at least: 5.0
-Tested up to: 6.0.3
-Stable tag: 1.2.1
+Tested up to: 6.1.1
+Stable tag: 1.3.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -31,7 +31,16 @@ Users can change:
 1. Outline around each block when set to always visible
 2. Editor outline settings
 
+== Filters ==
+- editor_outline_default_user_meta
+You can override the default user meta by using this filter. The filter will receive the default user meta as an array and
+you can return a modified array.
+Check github repo for more information. https://github.com/kalimahapps/Editor-Block-Outline#filters
+
 == Changelog ==
+= 1.3.0 =
+- Add default meta filter
+
 = 1.2.1 =
 
 - Fixed colorpalette issue with WordPress 6.0+

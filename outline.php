@@ -2,9 +2,9 @@
 /*
 Plugin Name: Editor Block Outline
 Description: Add outline around Gutenberg blocks while editing
-Version: 1.2.1
+Version: 1.3.0
 Author: Kalimah Apps
-Author URI: https://github.com/kalimah-apps
+Author URI: https://github.com/kalimahapps
 License: GPLv2 or later
 Text Domain: editor-outline
  */
@@ -18,7 +18,6 @@ require_once( 'promotions.php' );
  * Editor outline class to wrap plugin functions and actions
  */
 class EditorOutline {
-	private $user_meta = array();
 
 	/**
 	 * Constructor function.
@@ -36,12 +35,11 @@ class EditorOutline {
 	 * @return void
 	 */
 	public function register_user_meta() {
-		/*
-		Create array of user meta.
-		This array will also be used when plugin is deleted to
-		remove all meta
-		*/
-		$this->user_meta = array(
+
+		/**
+		 * Create default user meta options
+		 */
+		$default_user_meta = array(
 			'_enable_block_outline' => array(
 				'type'          => 'string',
 				'default'       => 'hover',
@@ -84,7 +82,9 @@ class EditorOutline {
 			),
 		);
 
-		$default_options = array(
+		$default_user_meta = $this->process_meta_filter($default_user_meta);
+
+		$standard_options = array(
 			'single'        => true,
 			'show_in_rest'  => true,
 			'auth_callback' => function () {
@@ -93,15 +93,95 @@ class EditorOutline {
 		);
 
 		// Merge default meta options and register meta
-		foreach ( $this->user_meta as $meta_key => $meta_value ) {
+		foreach ( $default_user_meta as $meta_key => $meta_value ) {
+
 			register_meta(
 				'user',
 				$meta_key,
-				array_merge( $meta_value, $default_options )
+				array_merge( $meta_value, $standard_options )
 			);
 		}
 	}
 
+	/**
+	 * Custom version of wp_die() to show error messages
+	 *
+	 * @param {string|array} $message Message to show
+	 *
+	 * @return void
+	 */
+	private function wp_die($message) {
+		$message = is_array($message) ? $message : array($message);
+
+		$heading = "<h2>Editor Block Outline</h2>";
+		$heading .= "<h4>Filter: editor_outline_default_user_meta</h4>";
+		array_unshift($message, $heading);
+
+		error_log(print_r($message,1));
+		wp_die(implode('<br>', $message));
+	}
+
+
+	private function process_meta_filter(array $default_user_meta): array {
+		// Create an associative array of default user meta options
+		$user_meta_associative = array_map( function( $item ) {
+			return $item['default'];
+		}, $default_user_meta );
+
+		/**
+		 * Add filter to allow modifying user meta options
+		 * @since 1.3.0
+		 */
+		$filtered_user_meta = apply_filters( 'editor_outline_default_user_meta', $user_meta_associative );
+
+		// Make sure filtered user meta is an array
+		if ( !is_array( $filtered_user_meta ) ) {
+			$this->wp_die(
+				"Default user meta options must be an <strong>array</strong>. You passed <strong>" . gettype( $filtered_user_meta ) . "</strong>.",
+			);
+		}
+
+		foreach ( $filtered_user_meta as $meta_key => $meta_value ) {
+			// Check that key exists in default user meta
+			if ( !array_key_exists( $meta_key, $default_user_meta ) ) {
+				$available_options = array_keys( $default_user_meta );
+				$formatted_options = array_map( function( $item ) {
+					return "<li>{$item}</li>";
+				}, $available_options );
+
+				$joined_options = implode( '', $formatted_options );
+				$this->wp_die([
+					"User meta option <strong>{$meta_key}</strong> does not exist in default user meta.",
+					"Available options are: <ul>{$joined_options}</ul>"
+				]);
+			}
+
+			// Check that value type matches default user meta
+			$default_key_type =  $default_user_meta[ $meta_key ]['type'];
+			$filtered_meta_type = gettype( $meta_value );
+
+			if( $filtered_meta_type === 'integer' ) {
+				$filtered_meta_type = 'number';
+			}
+
+			if ( $filtered_meta_type !== $default_key_type ) {
+				$this->wp_die([
+					"User meta option <strong>{$meta_key}</strong> must be of type <strong>$default_key_type</strong>.",
+					"You passed <strong>" . gettype( $meta_value ) . "</strong>."
+				]);
+			}
+
+			// Boolean values are passed as strings, so we need to convert them back to booleans
+			if ( $default_key_type === 'boolean' ) {
+				$meta_value = filter_var($meta_value, FILTER_VALIDATE_BOOLEAN);
+			}
+
+			// Override default user meta with filtered user meta
+			$default_user_meta[ $meta_key ]['default'] = $meta_value;
+		}
+
+		return $default_user_meta;
+	}
 
 	/**
 	 * Add js/css file to Gutenberg editor
@@ -222,6 +302,7 @@ class EditorOutline {
 		$show_class_name = get_user_meta( $current_user, '_show_class_name', true );
 		$lock_outline = get_user_meta( $current_user, '_lock_block_outline', true );
 		$block_data_position = get_user_meta( $current_user, '_block_data_position', true );
+		$enable_outline_padding = get_user_meta( $current_user, '_enable_outline_padding', true );
 		$outline_options  = array(
 			'show_outline'    => get_user_meta( $current_user, '_enable_block_outline', true ),
 			'show_block_name' => ( $show_block_name ) ? 'true' : 'false',
@@ -231,7 +312,7 @@ class EditorOutline {
 			'outline_color'   => get_user_meta( $current_user, '_block_outline_color', true ),
 			'outline_style'   => get_user_meta( $current_user, '_block_outline_style', true ),
 			'outline_opacity' => get_user_meta( $current_user, '_block_outline_opacity', true ),
-			'enable_outline_padding' => get_user_meta( $current_user, '_enable_block_outline_padding', true ),
+			'enable_outline_padding' => ( $enable_outline_padding ) ? 'true' : 'false',
 			'outline_padding' => get_user_meta( $current_user, '_block_outline_padding', true ),
 		);
 		wp_localize_script( 'outlines-init', 'outlineUserOptions', $outline_options );
