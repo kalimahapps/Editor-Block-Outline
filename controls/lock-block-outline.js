@@ -22,8 +22,9 @@ function lockBlockOutlineOption(props) {
 				outlineLockState: value,
 			});
 
-			// update editor ui
-			jQuery('body').attr('lock-block-outline', value);
+			// Update Editor UI
+			const body = getDocumentBody();
+			body.attr('lock-block-outline', value);
 
 			// update meta
 			this.debounce(() => {

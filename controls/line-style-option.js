@@ -31,13 +31,13 @@ function outlineStyleOption(props) {
 				isPrimary: currentValue === key,
 				isPressed: currentValue === key,
 				onClick: () => {
-					// upadte state to update control ui
+					// Update state to update control ui
 					props.setState({
 						outlineStyleState: key,
 					});
 
-					// update editor ui
-					const root = document.documentElement;
+					// Update Editor UI
+					const root = getDocumentRoot();
 					root.style.setProperty('--outline-style', key);
 
 					// update meta

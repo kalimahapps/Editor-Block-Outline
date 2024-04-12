@@ -17,8 +17,8 @@ function outlineOpacityOption(props) {
 			// Convert value to decimal
 			const metaValueDeci = value / 100;
 
-			// update editor ui
-			const root = document.documentElement;
+			// Update Editor UI
+			const root = getDocumentRoot();
 			root.style.setProperty('--outline-opacity', metaValueDeci);
 
 			// update state to update control ui

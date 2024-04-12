@@ -1,6 +1,7 @@
 (function ($) {
 	$(document).ready(() => {
-		const body = $('body');
+		const root = getDocumentRoot();
+		const body = getDocumentBody();
 		body.attr('show-outline', outlineUserOptions.show_outline);
 		body.attr('show-block-name', outlineUserOptions.show_block_name);
 		body.attr('show-class-name', outlineUserOptions.show_class_name);
@@ -8,7 +9,7 @@
 		body.attr('block-data-position', outlineUserOptions.block_data_position);
 		body.attr('enable-outline-padding', outlineUserOptions.enable_outline_padding);
 
-		// update outline color
+		// Update outline color
 		const c = jQuery.Color(outlineUserOptions.outline_color);
 		c.toHslaString();
 
@@ -17,7 +18,7 @@
 		const lightness = Math.round(c._hsla[2] * 100);
 
 		const hsla = `hsla(${c._hsla[0]}deg, ${saturation}%, ${lightness}%, var(--outline-opacity))`;
-		document.documentElement.style.setProperty('--outline-color', hsla);
+		root.style.setProperty('--outline-color', hsla);
 
 		// update text color
 		const colorLightness = c.lightness();
@@ -25,17 +26,17 @@
 		if (colorLightness < 0.5) {
 			color = '#ffffff';
 		}
-		document.documentElement.style.setProperty('--outline-text-color', color);
+		root.style.setProperty('--outline-text-color', color);
 
 		// Set line style
-		document.documentElement.style.setProperty('--outline-style', outlineUserOptions.outline_style);
+		root.style.setProperty('--outline-style', outlineUserOptions.outline_style);
 
 		// Set outline opacity
 		const opacity = outlineUserOptions.outline_opacity / 100;
-		document.documentElement.style.setProperty('--outline-opacity', opacity);
+		root.style.setProperty('--outline-opacity', opacity);
 
 		// Set outline padding
 		const padding = outlineUserOptions.outline_padding;
-		document.documentElement.style.setProperty('--outline-padding', `${padding}px`);
+		root.style.setProperty('--outline-padding', `${padding}px`);
 	});
 })(jQuery);

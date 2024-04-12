@@ -25,6 +25,9 @@ function enableOutlinePaddingOption(props) {
 			// update editor ui
 			jQuery('body').attr('enable-outline-padding', value);
 
+			// Update editor UI for WP6.2+ (Iframe Editor) 
+			jQuery('iframe.editor-canvas__iframe').contents().find('body').attr('enable-outline-padding', value);
+
 			// update meta
 			this.debounce(() => {
 				props.setMetaValue(value);

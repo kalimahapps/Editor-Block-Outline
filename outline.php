@@ -2,7 +2,7 @@
 /*
 Plugin Name: Editor Block Outline
 Description: Add outline around Gutenberg blocks while editing
-Version: 1.3.1
+Version: 1.3.2
 Author: Kalimah Apps
 Author URI: https://github.com/kalimahapps
 License: GPLv2 or later
@@ -24,8 +24,8 @@ class EditorOutline {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_user_meta' ) );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'add_editor_assets' ) );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'add_init_scripts' ) );
+		add_action( 'enqueue_block_assets', array( $this, 'add_editor_assets' ) );
+		add_action( 'enqueue_block_assets', array( $this, 'add_init_scripts' ) );
 	}
 
 
@@ -194,6 +194,10 @@ class EditorOutline {
 		// Enqueue scripts
 		$scripts = array(
 			array(
+				'file_path' => 'utils.js',
+				'deps' => array( 'jquery' ),
+			),
+			array(
 				'file_path' => 'controls.js',
 				'deps' => array(
 					'wp-element',
@@ -266,7 +270,8 @@ class EditorOutline {
 		foreach ( $scripts as $script_details ) {
 			$find = array( '.js', '/' );
 			$replace = array( '', '-' );
-			$handle = str_replace( $find, $replace, $script_details['file_path'] );
+			$file_name = str_replace( $find, $replace, $script_details['file_path'] );
+			$handle = "editor-{$file_name}";
 
 			$src = plugins_url( $script_details['file_path'], __FILE__ );
 			$deps = $script_details['deps'];
@@ -276,7 +281,7 @@ class EditorOutline {
 		}
 
 		wp_enqueue_style(
-			'gird-style',
+			'block-editor-outline',
 			plugin_dir_url( __FILE__ ) . '/block-editor.css',
 			false,
 			filemtime( dirname( __FILE__ ) . '/block-editor.css' ),
@@ -302,7 +307,7 @@ class EditorOutline {
 		$show_class_name = get_user_meta( $current_user, '_show_class_name', true );
 		$lock_outline = get_user_meta( $current_user, '_lock_block_outline', true );
 		$block_data_position = get_user_meta( $current_user, '_block_data_position', true );
-		$enable_outline_padding = get_user_meta( $current_user, '_enable_outline_padding', true );
+		$enable_outline_padding = get_user_meta( $current_user, '_enable_block_outline_padding', true );
 		$outline_options  = array(
 			'show_outline'    => get_user_meta( $current_user, '_enable_block_outline', true ),
 			'show_block_name' => ( $show_block_name ) ? 'true' : 'false',

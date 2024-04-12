@@ -15,7 +15,9 @@ function outlineColorOption(props) {
 		const lightness = Math.round(c._hsla[2] * 100);
 
 		const hsla = `hsla(${c._hsla[0]}deg, ${saturation}%, ${lightness}%, var(--outline-opacity))`;
-		const root = document.documentElement;
+
+		// Update UI
+		const root = getDocumentRoot();
 		root.style.setProperty('--outline-color', hsla);
 
 		// update text color

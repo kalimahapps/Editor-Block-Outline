@@ -17,11 +17,11 @@ function outlinePaddingOption(props) {
 		onChange: (value) => {
 			const metaValueWithPx = `${value}px`;
 
-			// get iframe root if available
+			// Update Editor UI
 			const root = getDocumentRoot();
 			root.style.setProperty('--outline-padding', metaValueWithPx);
 
-			// update state to update control ui
+			// Update state to update control ui
 			props.setState({
 				outlinePaddingState: value,
 			});

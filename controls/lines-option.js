@@ -31,13 +31,14 @@ function outlineShowOptions(props) {
 				isPrimary: currentValue === key,
 				isPressed: currentValue === key,
 				onClick: () => {
-					// upadte state to update control ui
+					// Update state to update control ui
 					props.setState({
 						outlineShowState: key,
 					});
 
-					// update editor ui
-					jQuery('body').attr('show-outline', key);
+					// Update editor ui
+					const body = getDocumentBody();
+					body.attr('show-outline', key);
 
 					// update meta
 					this.debounce(() => {
