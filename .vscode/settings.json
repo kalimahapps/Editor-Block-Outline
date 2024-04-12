@@ -105,13 +105,17 @@
 	"php-docblocker.qualifyClassNames": true,
 	"search.exclude": {
 		"**/node_modules": true,
+		"**/vendor": true,
 		"**/bower_components": true,
 		"**/.git": true,
-		"**/storage": true,
 		"**/tests": true,
-		"_ide_helper.php": true,
-		"_ide_helper_models.php": true,
-		"package-lock.json": true
+		"**/.vscode": true,
+		"**/out/**": true,
+		"package-lock.json": true,
+		"**/dist": true,
+		"**/build": true,
+		"**/coverage": true,
+		"**/docs": true
 	},
 	"files.eol": "\n",
 	"files.insertFinalNewline": false,
@@ -128,5 +132,81 @@
 	"git.showPushSuccessNotification": true,
 	"editor.snippetSuggestions": "bottom",
 	"workbench.editor.enablePreview": true,
-	"workbench.editor.enablePreviewFromQuickOpen": true
+	"workbench.editor.enablePreviewFromQuickOpen": true,
+	"terminal.integrated.defaultProfile.windows": "Git Bash",
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"source": "PowerShell",
+			"icon": "terminal-powershell",
+			"args": [
+				"-ExecutionPolicy",
+				"Bypass"
+			]
+		}
+	},
+	"editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+	"terminal.integrated.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+	"editor.lineHeight": 30,
+	"terminal.integrated.lineHeight": 1.15,
+	"terminal.integrated.tabs.enabled": true,
+	"editor.lineNumbers": "interval",
+	"eslint.codeAction.showDocumentation": {
+		"enable": true
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit"
+	},
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"json",
+		"jsonc",
+		"json5"
+	],
+	"editor.defaultFormatter": null,
+	"cSpell.allowCompoundWords": true,
+	"cSpell.language": "en,en-US",
+	"files.autoSave": "onFocusChange",
+	"search.collapseResults": "alwaysExpand",
+	"editor.formatOnSave": true,
+	"git.inputValidationLength": 100,
+	"git.inputValidationSubjectLength": 70,
+	"workbench.tree.indent": 20,
+	"tailwindCSS.emmetCompletions": true,
+	"css.validate": false,
+	"scss.validate": false,
+	"editor.codeLens": true,
+	"search.quickOpen.includeHistory": false,
+	"files.exclude": {
+		"out": false
+	},
+	"workbench.colorTheme": "Jameel",
+	"workbench.iconTheme": "file-icons",
+	"typescript.tsc.autoDetect": "off",
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"editor.stickyScroll.enabled": true,
+	"markdown.updateLinksOnFileMove.enabled": "prompt",
+	"gitlens.codeLens.enabled": false,
+	"cSpell.words": [
+		"kalimahapps"
+	],
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
+	},
+	"[php]": {
+		"editor.defaultFormatter": "KalimahApps.taqwim"
+	},
+	"[vue]": {
+		"editor.defaultFormatter": null,
+		"editor.formatOnSave": false,
+		"editor.codeLens": false
+	}
 }
