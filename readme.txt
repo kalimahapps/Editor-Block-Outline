@@ -3,7 +3,7 @@ Contributors: khr2003,tfrommen,sephsekla
 Tags: gutenberg,outline,editor,blocks,layout
 Requires at least: 5.0
 Tested up to: 6.5
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
