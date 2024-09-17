@@ -24,8 +24,8 @@ class EditorOutline {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_user_meta' ) );
-		add_action( 'enqueue_block_assets', array( $this, 'add_editor_assets' ) );
-		add_action( 'enqueue_block_assets', array( $this, 'add_init_scripts' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'add_editor_assets' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'add_init_scripts' ) );
 	}
 
 

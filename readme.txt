@@ -38,6 +38,10 @@ you can return a modified array.
 Check github repo for more information. https://github.com/kalimahapps/Editor-Block-Outline#filters
 
 == Changelog ==
+
+== 1.4.0 ==
+- Remove editor scripts from the frontend of the site
+
 = 1.3.2 =
 - Updated and fixed compatibility issues with WordPress 6.5
 
