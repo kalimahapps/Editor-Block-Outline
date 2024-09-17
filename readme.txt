@@ -3,7 +3,7 @@ Contributors: khr2003,tfrommen
 Tags: gutenberg,outline,editor,blocks,layout
 Requires at least: 5.0
 Tested up to: 6.5
-Stable tag: 1.3.2
+Stable tag: 1.4.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -39,7 +39,7 @@ Check github repo for more information. https://github.com/kalimahapps/Editor-Bl
 
 == Changelog ==
 
-== 1.4.0 ==
+= 1.4.0 =
 - Remove editor scripts from the frontend of the site
 
 = 1.3.2 =

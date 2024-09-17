@@ -2,7 +2,7 @@
 /*
 Plugin Name: Editor Block Outline
 Description: Add outline around Gutenberg blocks while editing
-Version: 1.3.2
+Version: 1.4.1
 Author: Kalimah Apps
 Author URI: https://github.com/kalimahapps
 License: GPLv2 or later
