@@ -1,5 +1,5 @@
 === Editor Block Outline ===
-Contributors: khr2003,tfrommen
+Contributors: khr2003,tfrommen,sephsekla
 Tags: gutenberg,outline,editor,blocks,layout
 Requires at least: 5.0
 Tested up to: 6.5
@@ -39,11 +39,17 @@ Check github repo for more information. https://github.com/kalimahapps/Editor-Bl
 
 == Changelog ==
 
+= 1.4.1 =
+- Update inconsistent documentation
+
 = 1.4.0 =
 - Remove editor scripts from the frontend of the site
 
 = 1.3.2 =
 - Updated and fixed compatibility issues with WordPress 6.5
+
+= 1.3.1 =
+- Tested with version 6.5
 
 = 1.3.0 =
 - Add default meta filter
