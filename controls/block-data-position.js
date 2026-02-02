@@ -37,10 +37,8 @@ function blockDataPositionOption(props) {
 					});
 
 					// update editor ui
-					jQuery('body').attr('block-data-position', key);
-
-					// Update editor UI for WP6.2+ (Iframe Editor) 
-					jQuery('iframe.editor-canvas__iframe').contents().find('body').attr('block-data-position', key);
+					const body = getDocumentBody();
+					body.attr('block-data-position', key);
 
 					// update meta
 					this.debounce(() => {

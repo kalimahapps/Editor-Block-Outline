@@ -2,8 +2,8 @@
 Contributors: khr2003,tfrommen,sephsekla
 Tags: gutenberg,outline,editor,blocks,layout
 Requires at least: 5.0
-Tested up to: 6.5
-Stable tag: 1.4.2
+Tested up to: 6.9
+Stable tag: 1.4.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -38,6 +38,8 @@ you can return a modified array.
 Check github repo for more information. https://github.com/kalimahapps/Editor-Block-Outline#filters
 
 == Changelog ==
+= 1.4.3 =
+- Update to make it compatible with WordPress 6.9
 
 = 1.4.1 =
 - Update inconsistent documentation

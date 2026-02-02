@@ -5,11 +5,11 @@
  * @returns {HTMLElement} - The root element of the document
  */
 const getDocumentRoot = () => {
-	const iframeRoot = document.querySelector('iframe.editor-canvas__iframe')?.contentDocument.documentElement;
+	const iframeRoot = document.querySelector('iframe[name="editor-canvas"]')?.contentDocument.documentElement;
 	return iframeRoot ?? document.documentElement;
 }
 
 const getDocumentBody = () => {
-	const iframeBody = jQuery('iframe.editor-canvas__iframe').contents().find('body');
+	const iframeBody = jQuery('iframe[name="editor-canvas"]').contents().find('body');
 	return iframeBody.length ? iframeBody : jQuery('body');
 }

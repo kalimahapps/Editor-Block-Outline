@@ -163,14 +163,17 @@
 		"typescriptreact",
 		"json",
 		"jsonc",
-		"json5"
+		"json5",
+		"vue",
+		"yml",
+		"yaml"
 	],
 	"editor.defaultFormatter": null,
 	"cSpell.allowCompoundWords": true,
 	"cSpell.language": "en,en-US",
 	"files.autoSave": "onFocusChange",
 	"search.collapseResults": "alwaysExpand",
-	"editor.formatOnSave": true,
+	"editor.formatOnSave": false,
 	"git.inputValidationLength": 100,
 	"git.inputValidationSubjectLength": 70,
 	"workbench.tree.indent": 20,
@@ -208,5 +211,7 @@
 		"editor.defaultFormatter": null,
 		"editor.formatOnSave": false,
 		"editor.codeLens": false
-	}
+	},
+	"editor.minimap.enabled": false,
+	"fileNestingUpdater.autoUpdate": true
 }
